@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: EmlakBuradaGateway
+  cloud:
+    gateway:
+      routes:
+        - id: EmlakBuradaUser
+          uri: lb://EMLAKBURADAUSER
+          predicates:
+            - Path=/api/v1/users/**
+        - id: EmlakBuradaProje
+          uri: lb://EMLAKBURADAPROJE
+          predicates:
+            - Path=/api/v1/listings/**, /api/v1/payments/**, /api/v1/adverts/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
